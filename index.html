@@ -151,18 +151,40 @@
                                             }
                                             if (catcher.y > 450) {
                                                 catcher.y = 450;
+                                                gameover = true;
                                             }
+                                        }
+
+                                        gameOver = function() {
+                                            ctx.save();
+                                            
+                                            ctx.globalAlpha = 0.6;
+                                            drawObject(blood, 100, 100, 300, 300);
+                                            ctx.globalAlpha = 1.0;
+                                            ctx.strokeStyle = "#FFF";
+                                            ctx.font = "30px Ubuntu"; // Calibri for windows / macOs
+                                            ctx.strokeText("Game Over", 180, 200);
+                                            ctx.strokeText("Click to Restart", 160, 250);
+
+                                            ctx.restore();
+                                            clearInterval(intervalVar);
                                         }
 
                                         updatePosition = function() {
                                             ctx.clearRect(0, 0, 500, 500);
                                             drawObject(background, 0, 0, 500, 500);
                                             foodTimer++;
+
                                             if (foodTimer > level) {
                                                 foodList.push({'x':foodDrop[Math.round(Math.random()*9)], 'y':0});
                                                 foodTimer = 0;
                                             }
-                                            if (catcher.onair) {
+
+                                            if (gameover) {
+                                                drawObject(catcherThree, catcher.x, 470, 50, 30);
+                                                gameOver();
+                                            }
+                                            else if (catcher.onair) {
                                                 drawObject(catcherFour, catcher.x, catcher.y, catcher.width, catcher.height);
                                             }
                                             else if (animation == 0) {
