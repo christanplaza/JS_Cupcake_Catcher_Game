@@ -10,8 +10,6 @@
     <script>
         var ctx = document.getElementById('ctx').getContext('2d');        
 
-        // So before, the objects were made using Native JS objects, now our resources are going to be from external sources
-        // So we need to make sure that the resources are loaded first before we start our game.
         var catcherOne = new Image();
         var catcherTwo = new Image();
         var catcherThree = new Image();
@@ -21,7 +19,32 @@
         var tile = new Image();
         var food = new Image();
 
-        // Condition to check if the images have loaded or not.
+        var tileObject = {
+            'width': 50,
+            'height': 20
+        };
+
+        var foodObject = {
+            'width': 50,
+            'height': 50,
+            'spd': 3
+        };
+
+        var catcher= {
+            'x': 100,
+            'y': 350,
+            'width': 30,
+            'height': 50,
+            'jump': 0,
+            'jumpUnit': 5,
+            'onair': false,
+            'spd': 0,
+            'leftPressed': false,
+            'rightPressed': false,
+            'gravity': 10,
+            'safe': true
+        };
+
         background.onload = function() {
             blood.onload = function() {
                 catcherOne.onload = function() {
@@ -31,7 +54,6 @@
                                 food.onload = function() {
                                     tile.onload = function() {
                                         // Game Area
-
                                         console.log("All resources have loaded");
                                     }
                                     tile.src = "images/tile.png";
