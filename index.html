@@ -94,6 +94,26 @@
                                             }
                                         }
 
+                                        food_catcher_collision = function(food) {
+                                            return ((food.x < catcher.x + catcher.width) &&
+                                                    (catcher.x < food.x + foodObject.width) &&
+                                                    (food.y < catcher.y + catcher.height) &&
+                                                    (catcher.y < food.y + foodObject.height));
+                                        }
+
+                                        food_title_collision = function(food, tile) {
+                                            return ((food.x < tile.x + tileObject.width) &&
+                                                    (tile.x < food.x + foodObject.width) &&
+                                                    (food.y < tile.y + tileObject.height) &&
+                                                    (tile.y < food.y + foodObject.height));
+                                        }
+
+                                        catcher_tile_collision = function(tile) {
+                                            return ((catcher.x <= tile.x + tileObject.width) &&
+                                                    (tile.x <= catcher.x + catcher.width) &&
+                                                    (catcher.y + catcher.height <= tile.y));
+                                        }
+
                                         jump = function() {
                                             // Moving the Catcher Upwards
                                             if (catcher.jump > 0 && catcher.onair) {
