@@ -123,7 +123,10 @@
                                         updatePosition = function() {
                                             ctx.clearRect(0, 0, 500, 500);
                                             drawObject(background, 0, 0, 500, 500);
-                                            if (animation == 0) {
+                                            if (catcher.onair) {
+                                                drawObject(catcherFour, catcher.x, catcher.y, catcher.width, catcher.height);
+                                            }
+                                            else if (animation == 0) {
                                                 drawObject(catcherOne, catcher.x, catcher.y, catcher.width, catcher.height);
                                                 animation = 1;
                                             } else {
