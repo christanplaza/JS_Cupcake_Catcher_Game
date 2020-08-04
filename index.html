@@ -123,6 +123,11 @@
                                         updatePosition = function() {
                                             ctx.clearRect(0, 0, 500, 500);
                                             drawObject(background, 0, 0, 500, 500);
+                                            foodTimer++;
+                                            if (foodTimer > 100) {
+                                                foodList.push({'x':foodDrop[Math.round(Math.random()*9)], 'y':0});
+                                                foodTimer = 0;
+                                            }
                                             if (catcher.onair) {
                                                 drawObject(catcherFour, catcher.x, catcher.y, catcher.width, catcher.height);
                                             }
