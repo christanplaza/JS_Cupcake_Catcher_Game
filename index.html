@@ -65,9 +65,20 @@
                                 food.onload = function() {
                                     tile.onload = function() {
                                         // Game Area
-
+                                        
+                                        ctx.drawImage(background, 0, 0, 500, 500);
+                                        ctx.strokeStyle = "#FFF";
+                                        ctx.font = "30px Ubuntu"; //Calibri for Windows / macOS
+                                        ctx.strokeText("Click here to start", 125, 250);
                                         drawObject = function(object, x, y, width, height) {
                                             ctx.drawImage(object, x, y, width, height);
+                                        }
+
+                                        document.getElementById('ctx').onmousedown = function() {
+                                            if (!gameover) {
+                                                clearInterval(intervalvar);
+                                            }
+                                            startGame();
                                         }
 
                                         document.onkeydown = function(event) {
@@ -167,7 +178,7 @@
                                             ctx.strokeText("Click to Restart", 160, 250);
 
                                             ctx.restore();
-                                            clearInterval(intervalVar);
+                                            clearInterval(intervalvar);
                                         }
 
                                         updatePosition = function() {
@@ -271,8 +282,6 @@
 
                                             intervalvar = setInterval(updatePosition, 10);
                                         }
-
-                                        startGame();
                                     }
                                     tile.src = "images/tile.png";
                                 }
