@@ -56,6 +56,27 @@
             'safe': true
         };
 
+        sound = function(src) {
+            this.sound = document.createElement("audio");
+            this.sound.src = src;
+            this.sound.volume = 0.3;
+            this.sound.setAttribute("preload", "auto");
+            this.sound.setAttribute("controls", "none");
+            this.sound.style.display = "none";
+            document.body.appendChild(this.sound);
+            
+            this.play = function() {
+                this.sound.play();
+            }
+
+            this.pause = function() {
+                this.sound.pause();
+            }
+        }
+
+        var eatingSound = new sound("sound/eat.mp3");
+        var droppingSound = new sound("sound/drop.mp3");
+
         background.onload = function() {
             blood.onload = function() {
                 catcherOne.onload = function() {
@@ -161,6 +182,7 @@
                                                 catcher.x += catcher.spd;
                                             }
                                             if (catcher.y > 450) {
+                                                droppingSound.play();
                                                 catcher.y = 450;
                                                 gameover = true;
                                             }
@@ -217,6 +239,7 @@
                                             for (var i in foodList) {
                                                 if (food_catcher_collision(foodList[i])) {
                                                     score++;
+                                                    eatingSound.play();
                                                     if (score % 2 == 0) {
                                                         level--;
                                                     }
